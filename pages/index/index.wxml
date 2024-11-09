@@ -1,0 +1,72 @@
+<!--index.wxml-->
+<navigation-bar title="同城高质量搭子组局群" back="{{false}}" color="black" background="#2A8CE5"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <van-row>
+    <van-col span="24">
+      <van-notice-bar
+        left-icon="volume-o"
+        color="red"
+        background="rgb(219, 232, 248)"
+        scrollable
+        text="欢迎你xxx加入同城群聊"
+      />
+    </van-col>
+  </van-row>
+  <van-row custom-class="tips-want-row">
+    <van-col span="24">
+      <van-notice-bar
+        scrollable="{{false}}"
+        left-icon="info"
+        background="rgb(247, 239, 230)"
+        text="1. 关注喜欢的群；2.加入粉群；3.关注群消息"
+      />
+    </van-col>
+  </van-row>
+  <van-row>
+    <van-col span="24">
+      <swiper
+        autoplay="{{autoplay}}"
+        interval="{{interval}}"
+        duration="{{duration}}"
+        indicator-dots="{{indicatorDots}}"
+        style="height: 230px;"
+      >
+        <block wx:for="{{provinceList}}" wx:for-index="pidx" wx:key="*this" wx:for-item="list">
+          <swiper-item>
+            <van-grid column-num="5" border="{{ false }}">
+              <van-grid-item use-slot wx:for="{{list}}" wx:for-item="p" wx:key="*this">
+                <image class="province-image" src="{{p.imgUrl}}" data-pcode="{{p.code}}" bind:tap="itemTaped"/>
+                <span class="province-name" >{{p.name}}</span>
+              </van-grid-item>
+            </van-grid>
+          </swiper-item>
+        </block>
+      </swiper>
+    </van-col>
+  </van-row>
+
+  <van-row wx:for="{{groupList[pcode]}}" wx:for-index="idx" wx:key="*this" wx:for-item="g">
+    <van-col span="5">
+      <image class="group-avatar" src="{{g.imgUrl}}" />
+      <!-- <van-icon name="require('../../images/group/group10.png')" /> -->
+      <!-- <van-icon size="60px" name="https://b.yzcdn.cn/vant/icon-demo-1126.png" dot/> -->
+      <!-- <van-icon size="78px" name="https://img.alicdn.com/imgextra/i1/2111009362/O1CN012gNNhr2J1qnhiEXOX_!!2111009362.jpg" dot/> -->
+    </van-col>
+    <van-col span="14"> 
+      <van-notice-bar class="group-name"
+        scrollable="{{ false }}"
+        text="{{g.name}}"
+      />
+      <van-notice-bar
+        class="group-message"
+        scrollable="{{ false }}"
+        text="{{g.message}}"
+      />
+    </van-col>
+    <van-col span="5">
+      <van-button 
+      class="group-button"
+      type="danger" size="small" round>加群</van-button>
+    </van-col>
+  </van-row>
+</scroll-view>
